@@ -6,18 +6,15 @@ import sqlite3
 app = Flask(__name__)
 app.secret_key = "ClaseSuperSecreta"
 
-# Flask-Login
 login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
 
-# Conexión a base de datos
 def get_db_connection():
     conn = sqlite3.connect("blog.db")
     conn.row_factory = sqlite3.Row
     return conn
 
-# Crear tablas si no existen
 def init_db():
     conn = get_db_connection()
     conn.execute("""
@@ -71,8 +68,6 @@ class User(UserMixin):
 @login_manager.user_loader
 def load_user(user_id):
     return User.get_by_id(user_id)
-
-# ======================== RUTAS ===========================
 
 @app.route("/")
 def index():
