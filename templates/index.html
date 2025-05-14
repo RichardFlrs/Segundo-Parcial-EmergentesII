@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-center mb-4">Inicio</h2>
+<h2>Todos los Posts</h2>
+{% for post in posts %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <strong>{{ post['title'] }}</strong>
+            <span class="text-muted float-end">{{ post['created_at'] }} por {{ post['username'] }}</span>
+        </div>
+        <div class="card-body">
+            <p>{{ post['content'] }}</p>
+        </div>
+    </div>
+{% else %}
+    <p>No hay posts publicados aún.</p>
+{% endfor %}
+{% endblock %}
